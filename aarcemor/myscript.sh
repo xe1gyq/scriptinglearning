@@ -13,12 +13,17 @@ KERNELORG_PATH="https://www.kernel.org/pub/linux/kernel/v3.x/"
 KERNELORG_FILE="linux-"
 KERNELORG_VERSION=$VERSION
 KERNELORG_FILETYPE=".tar."$FILETYPE
+KERNELORG_OURFILE="$KERNELORG_FILE$KERNELORG_VERSION$KERNELORG_FILETYPE"
 
 # Variables directory structure
 DIRECTORY_ROOT=`pwd`
 DIRECTORY_KERNELORG=$DIRECTORY_ROOT/kernelorg
 DIRECTORY_OFFICIAL=$DIRECTORY_ROOT/official
 DIRECTORY_TEMPORAL=$DIRECTORY_ROOT/temporal
+
+# Variables official structure
+OFFICIAL_KERNELNAME="$KERNELORG_FILE$KERNELORG_VERSION"
+OFFICIAL_KERNELDIRECTORY="$DIRECTORY_OFFICIAL/$OFFICIAL_KERNELNAME"
 
 download() {
   cd $DIRECTORY_KERNELORG
@@ -34,11 +39,23 @@ directory_create() {
 }
 
 directory_cleanup() {
- echo
+  echo
+}
+
+uncompress() {
+  cd $DIRECTORY_KERNELORG
+  tar xf $KERNELORG_OURFILE
+  cd $DIRECTORY_ROOT 
+}
+
+official_setup() {
+  cp -r $DIRECTORY_KERNELORG/$OFFICIAL_KERNELNAME $OFFICIAL_KERNELDIRECTORY
 }
 
 download
 directory_create
+uncompress
+official_setup
 directory_cleanup
 
 # End of file
