@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Hola mundo, ahora estas corriendo el script que te facilitara la vida"
+echo "My script is running"
 
 echo "0:" $0 # file
 echo "1:" $1 # location
@@ -78,10 +78,11 @@ echo $modulesOc of ocurrences for \#include \<linux\/module\.h\> >> stats.pre
 
 grep -rE $patternMail OfficialWorkingDirectory | sed -r 's/(.*):\s*\*\s*([^<]*)<(.*)@(.*)/\1 | \2 | \3/g' > intel.contributors
 
-mkdir OfficialWorkingDirectory\cFiles
-mkdir OfficialWorkingDirectory\hFiles
-mkdir OfficialWorkingDirectory\othersFiles
+mkdir -p OfficialWorkingDirectory/cFiles
+mkdir -p OfficialWorkingDirectory/hFiles
+mkdir -p OfficialWorkingDirectory/othersFiles
 
-find -type f -name "*.c" -exec mv {} OfficialWorkingDirectory\cFiles \;
-find -type f -name "*.h" -exec mv {} OfficialWorkingDirectory\hFiles \;
-find -type f ! -name "*.h" -a ! -name "*.c" -exec mv {} OfficialWorkingDirectory\othersFiles \;
+find -type f -name "*.c" -exec mv --backup=numbered {} OfficialWorkingDirectory/cFiles \;
+find -type f -name "*.h" -exec mv {} OfficialWorkingDirectory/hFiles \;
+find -type f ! -name "*.h" -a ! -name "*.c" -exec mv {} OfficialWorkingDirectory/othersFiles \;
+
