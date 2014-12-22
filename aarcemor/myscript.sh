@@ -65,10 +65,13 @@ official_setup() {
 
 preprocessing() {
   cd $OFFICIAL_KERNEL_DIRECTORY
-  files_count "Makefile"
-  files_count "Kconfig"
-  files_count "*.c"
-  files_count "*.h"
+  files_count "README" && files_copy "README"
+  files_count "Kconfig" && files_copy "Kconfig"
+  files_count "Kbuild" && files_copy "Kbuild"
+  files_count "Makefile" && files_copy "Makefile"
+  files_count "*.c" && files_copy "*.c"
+  files_count "*.h" && files_copy "*.h"
+  files_count "*.pl" && files_copy "*.pl"
   cd $DIRECTORY_ROOT
 }
 
