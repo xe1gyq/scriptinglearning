@@ -36,6 +36,12 @@ files_copy() {
   find . -name ${FILETYPE} | xargs cp --parents -t $DIRECTORY_TEMPORAL
 }
 
+string_search() {
+  STRING=$1
+  grep -R $STRING .
+  find . -type f -print -exec grep $STRING {} \;
+}
+
 download() {
   cd $DIRECTORY_KERNELORG
   echo "$KERNELORG_PATH$KERNELORG_FILE$KERNELORG_VERSION$KERNELORG_FILETYPE"
