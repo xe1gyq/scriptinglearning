@@ -49,6 +49,7 @@ echo $FINAL_DIR
 
 mkdir -v $TEMP_DIR $FINAL_DIR
 touch $FINAL_DIR/stats.pre
+STS_PRE="$FINAL_DIR/stats.pre"
 touch $FINAL_DIR/stats.post
 ls $FINAL_DIR
 read -p "Pause..."
@@ -73,16 +74,25 @@ tar xvzf $TEMP_DIR/$FILENAME 1>file.lst
 
 #Full path and character error free
 
-find "linux-$KERNEL_NUMBER" -name *README | wc -l > README_files.count 
-find "linux-$KERNEL_NUMBER" -name *Kconfig | wc -l > Kconfig_files.count
-find "linux-$KERNEL_NUMBER" -name *Kbuild | wc -l > Kbuild_files.count
-find "linux-$KERNEL_NUMBER" -name *Makefile | wc -l > Make_files.count
-find "linux-$KERNEL_NUMBER" -name *.c | wc -l > c_files.count
-find "linux-$KERNEL_NUMBER" -name *.h | wc -l > h_files.count
-find "linux-$KERNEL_NUMBER" -name *.pl | wc -l > pl_files.count
 
-#total files 
-find "linux-$KERNEL_NUMBER" -depth -type f | wc -l > total.count
+echo "# of README files " >> $STS_PRE
+find "linux-$KERNEL_NUMBER" -name *README | wc -l >> $STS_PRE
+echo "# of Kconfig files "  >> $STS_PRE
+find "linux-$KERNEL_NUMBER" -name *Kconfig | wc -l >> $STS_PRE
+echo "# of Kbuild files " >> $STS_PRE
+find "linux-$KERNEL_NUMBER" -name *Kbuild | wc -l >> $STS_PRE
+echo "# of Makefile files " >> $STS_PRE
+find "linux-$KERNEL_NUMBER" -name *Makefile | wc -l >> $STS_PRE
+echo "# of c files " >> $STS_PRE
+find "linux-$KERNEL_NUMBER" -name *.c | wc -l >> $STS_PRE
+echo "# of h " >> $STS_PRE
+find "linux-$KERNEL_NUMBER" -name *.h | wc -l >> $STS_PRE
+echo "# of pl files " >> $STS_PRE
+find "linux-$KERNEL_NUMBER" -name *.pl | wc -l >> $STS_PRE
+
+#total files
+echo "# of Total files " >> $STS_PRE 
+find "linux-$KERNEL_NUMBER" -depth -type f | wc -l >> $STS_PRE
 #counting to do differences
 
 #counter=0
